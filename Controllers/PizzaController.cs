@@ -26,7 +26,12 @@ public ActionResult<Pizza> Get(int id)
     return pizza;
 }
 
-    // POST action
+   [HttpPost]
+public IActionResult Create(Pizza pizza)
+{            
+    PizzaService.Add(pizza);
+    return CreatedAtAction(nameof(Get), new { id = pizza.Id }, pizza);
+}
 
     // PUT action
 
