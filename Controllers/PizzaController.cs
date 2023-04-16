@@ -33,7 +33,20 @@ public IActionResult Create(Pizza pizza)
     return CreatedAtAction(nameof(Get), new { id = pizza.Id }, pizza);
 }
 
-    // PUT action
+   [HttpPut("{id}")]
+public IActionResult Update(int id, Pizza pizza)
+{
+    if (id != pizza.Id)
+        return BadRequest();
+           
+    var existingPizza = PizzaService.Get(id);
+    if(existingPizza is null)
+        return NotFound();
+   
+    PizzaService.Update(pizza);           
+   
+    return NoContent();
+}
 
     // DELETE action
 }
